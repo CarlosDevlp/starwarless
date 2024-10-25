@@ -1,0 +1,24 @@
+# package directories
+node_modules
+.esbuild
+
+# Serverless directories
+.serverless
+.dynamodb
+
+# others
+DynamoDBLocal.jar
+shared-local-instance.db
+**/.DS_Store
+.DS_Store
+
+dynamodb-local-metadata.json
+
+
+dist/
+build/
+coverage/
+
+.vscode/
+
+package-lock.json

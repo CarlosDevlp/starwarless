@@ -1,0 +1,105 @@
+service: starwarless
+frameworkVersion: '3'
+
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  #stage: dev
+  environment:
+    STAR_WARS_API_URL: https://swapi.dev/api
+    FILMS_TABLE: ${self:service}-films
+    PEOPLE_TABLE: ${self:service}-people
+    MODE: ${opt:stage, 'dev'}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource:
+            - Fn::GetAtt: [FilmsTable, Arn]
+            - Fn::GetAtt: [PeopleTable, Arn]
+
+
+functions:
+  getPeople:
+    handler: functions/people/getAll.handler
+    events:
+      - http:
+          method: get
+          path: /people
+
+  addPeople:
+    handler: functions/people/addPeople.handler
+    events:
+      - http:
+          method: post
+          path: /people
+
+  getPerson:
+    handler: functions/people/getById.handler
+    events:
+      - http:
+          method: get
+          path: /people/{id}
+
+  getFilms:
+    handler: functions/films/getAll.handler
+    events:
+      - http:
+          method: get
+          path: /films
+  addFilm:
+    handler: functions/films/addFilm.handler
+    events:
+      - http:
+          method: post
+          path: /films
+
+  getFilm:
+    handler: functions/films/getById.handler
+    events:
+      - http:
+          method: get
+          path: /films/{id}
+
+resources:
+  Resources:
+    FilmsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.FILMS_TABLE}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S 
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+    PeopleTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.PEOPLE_TABLE}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S 
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+
+plugins:
+  - serverless-esbuild
+  - serverless-offline
+  #- serverless-dynamodb-local
+  #- serverless-aws-documentation
+  
+

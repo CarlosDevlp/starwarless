@@ -1,0 +1,156 @@
+openapi: 3.0.0
+info:
+  title: Starwarless API
+  description: API que permite agregar y obtener información acerca de las peliculas y personajes de la saga Star Wars
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/local
+    description: Local development server
+
+paths:
+  /people:
+    get:
+      summary: Obten todos los personajes
+      description: Obten una lista con todos los personajes
+      responses:
+        '200':
+          description: List of people
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/People'
+
+    post:
+      summary: Agrega un nuevo personaje
+      description: Agrega un nuevo personaje a la base de datos.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/People'
+      responses:
+        '201':
+          description: Person created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/People'
+
+  /people/{id}:
+    get:
+      summary: Retorna un personaje por su ID
+      description: Retorna un personaje por su ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: El ID del personaje
+      responses:
+        '200':
+          description: A person object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/People'
+        '404':
+          description: Person not found
+
+  /films:
+    get:
+      summary: Obten todas las peliculas
+      description: Retorna una lista de todas las peliculas.
+      responses:
+        '200':
+          description: List of films
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Film'
+
+    post:
+      summary: Agrega una nueva pelicula
+      description: Agrega una nueva pelicula a la base de datos.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Film'
+      responses:
+        '201':
+          description: Film created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Film'
+
+  /films/{id}:
+    get:
+      summary: Retorna una pelicula por su ID
+      description: Retorna una pelicula por su ID.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: El ID de la pelicula
+      responses:
+        '200':
+          description: A film object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Film'
+        '404':
+          description: Film not found
+
+components:
+  schemas:
+    People:
+      type: object
+      properties:
+        nombre:
+          type: string
+        altura:
+          type: string
+        peso:
+          type: string
+        color_cabello:
+          type: string
+        color_piel:
+          type: string
+        color_ojos:
+          type: string
+        nacimiento:
+          type: string
+        genero:
+          type: string
+        planeta_natal:
+          type: string
+
+    Film:
+      type: object
+      properties:
+        id:
+          type: string
+        titulo:
+          type: string
+        episodio:
+          type: integer
+        resumen:
+          type: string
+        director:
+          type: string
+        productor:
+          type: string
+        fecha_lanzamiento:
+          type: string
+          format: date
