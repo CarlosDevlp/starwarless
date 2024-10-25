@@ -64,8 +64,8 @@ export class StarWarsFilmService {
             const data:any = await this.db.send(new ScanCommand({
                 TableName: this.FILMS_TABLE,  // Name of your DynamoDB table
             }));
-            console.log('data is: ', data?.Items);
-            return this.parseFilms(data?.Items || []);
+            //return this.parseFilms(data?.Items || []); //TODO: uncomment if its not working
+            return data?.Items || [];
         }catch(error){
             throw new Error(error?.detail || error?.message || error);
         }

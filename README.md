@@ -1,4 +1,4 @@
-<h1>#StarWarLess</h1>
+<h1>#StarWarLess - GUIA DE USO</h1>
 
 <h2>Tecnologias usadas</h2>
 <ul>
@@ -24,6 +24,28 @@ $ npm i -g serverless@3.38.0
 ```
 
 -Descargue DynamoDB Local desde la página oficial de AWS [click aquí](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html) y ubique su contenido en la carpeta <b>/dynamodb_local</b>
+
+-Por último, agregue las tablas al dynamodb local
+
+```bash
+$ aws dynamodb create-table \
+  --table-name starwarless-films \
+  --attribute-definitions AttributeName=id,AttributeType=S \
+  --key-schema AttributeName=id,KeyType=HASH \
+  --billing-mode PAY_PER_REQUEST \
+  --endpoint-url http://localhost:8000 \
+  --region us-east-1
+```
+
+```bash
+$ aws dynamodb create-table \
+  --table-name starwarless-people \
+  --attribute-definitions AttributeName=id,AttributeType=S \
+  --key-schema AttributeName=id,KeyType=HASH \
+  --billing-mode PAY_PER_REQUEST \
+  --endpoint-url http://localhost:8000 \
+  --region us-east-1
+```
 
 ### Ejecutarlo localmente
 
@@ -75,3 +97,9 @@ $ sls deploy
 $ npm run deploy
 ```
 
+-NOTA: en el archivo starwars-films.service.ts, uncomment la linea de código (como se muestra abajo) de ser 
+necesario.
+
+```
+//return this.parseFilms(data?.Items || []); TODO: uncomment if its not working
+```
