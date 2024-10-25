@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "8d89bc4d-ef1f-47d9-a055-28fd97ee0b11",
+		"name": "Starwarless",
+		"description": "API que permite agregar y obtener información acerca de las peliculas y personajes de la saga Star Wars",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30110498"
+	},
+	"item": [
+		{
+			"name": "People",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_BASE_URL}}/people/",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"people",
+						""
+					]
+				},
+				"description": "Obten una lista con todos los personajes"
+			},
+			"response": []
+		},
+		{
+			"name": "Person",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Hana Song\",\n    \"altura\": \"160\",\n    \"peso\": \"50\",\n    \"color_cabello\": \"marron\",\n    \"color_piel\": \"blanca\",\n    \"color_ojos\": \"marron\",\n    \"nacimiento\": \"19BBY\",\n    \"genero\": \"mujer\",\n    \"planeta_natal\": \"tierra\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/people/",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"people",
+						""
+					]
+				},
+				"description": "Agrega un nuevo personaje a la base de datos."
+			},
+			"response": []
+		},
+		{
+			"name": "Person",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_BASE_URL}}/people/1",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"people",
+						"1"
+					]
+				},
+				"description": "Retorna un personaje por su ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Films",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_BASE_URL}}/films",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"films"
+					]
+				},
+				"description": "Retorna una lista de todas las peliculas."
+			},
+			"response": []
+		},
+		{
+			"name": "Film",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n            \"titulo\": \"Rogue One\",\n            \"episodio\": 11,\n            \"resumen\": \"Alternativa\",\n            \"director\": \"Disney\",\n            \"productor\": \"Disney\",\n            \"fecha_lanzamiento\": \"2014-05-25\"\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/films/",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"films",
+						""
+					]
+				},
+				"description": "Agrega una nueva pelicula a la base de datos."
+			},
+			"response": []
+		},
+		{
+			"name": "Film",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_BASE_URL}}/films/9ab40d3c-09ba-4c83-9b46-b2aab97fb061",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"films",
+						"9ab40d3c-09ba-4c83-9b46-b2aab97fb061"
+					]
+				},
+				"description": "Retorna una pelicula por su ID."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API_BASE_URL",
+			"value": "http://localhost:3000/local"
+		}
+	]
+}

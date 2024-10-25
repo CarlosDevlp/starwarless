@@ -97,7 +97,12 @@ $ sls deploy
 $ npm run deploy
 ```
 
--NOTA: en el archivo starwars-films.service.ts, uncomment la linea de código (como se muestra abajo) de ser 
+### Postman API Collection
+-Descargue desde aquí mismo la colección de postman usada para este proyecto.
+[Starwarless.postman_collection.json](./Starwarless.postman_collection.json)
+
+### Nota
+-en el archivo starwars-films.service.ts, uncomment la linea de código (como se muestra abajo) de ser 
 necesario.
 
 ```
